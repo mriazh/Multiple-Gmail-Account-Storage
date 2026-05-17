@@ -1,0 +1,50 @@
+# Sensitive profile data - JANGAN DI-COMMIT
+Grup_*/
+grup_*/
+test_dir/
+test_window/
+test_window2/
+logs/
+
+# Entire profile directories (Stricter Pattern)
+**/prefs.js
+**/extensions.json
+**/containers.json
+**/handlers.json
+**/xulstore.json
+**/pkcs11.txt
+**/compatibility.ini
+**/times.json
+**/sessionCheckpoints.json
+**/extension-settings.json
+**/extension-preferences.json
+
+# SQLite & Database files
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.jsonlz4
+*.lz4
+*.bin
+*.db
+*.ini
+
+# Cache & Storage directories
+cache2/
+startupCache/
+storage/
+extension-store/
+extension-store-menus/
+jumpListCache/
+bookmarkbackups/
+thumbnails/
+safebrowsing/
+security_state/
+datareporting/
+sessionstore-backups/
+
+# Python Virtual Environment
+venv/
+.env
+__pycache__/
+*.pyc
