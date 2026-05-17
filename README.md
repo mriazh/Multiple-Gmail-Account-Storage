@@ -1,39 +1,44 @@
-# Multiple Gmail Account Storage 🦊🛡️
+# Multiple Gmail Account Storage
 
 A secure, isolated browser launcher for managing multiple Gmail/Google accounts using [Camoufox](https://camoufox.com/python). 
 Designed to bypass strict fingerprinting, prevent cross-contamination between accounts, and ensure privacy.
 
-## ✨ Fitur Utama
-- **Isolasi Penuh:** Setiap akun (grup) berjalan di profil browser (user data dir) yang benar-benar terpisah. Cookies, cache, dan sesi tidak akan pernah bocor antar akun.
-- **Bypass Fingerprinting:** Menggunakan konfigurasi Camoufox untuk menghindari deteksi *bot/fraud* dari sistem keamanan Google.
-- **Penyesuaian Resolusi (Anti-Clipping):** Memaksa resolusi *viewport* (1200x700) agar sesuai dengan tampilan monitor Windows, mencegah terdeteksinya ukuran layar yang tidak wajar.
-- **Log Aktivitas Lengkap:** Melacak semua error, navigasi, dan informasi teknis browser secara *real-time* ke folder `logs/` (dengan sistem filter otomatis untuk URL sensitif).
-- **Keamanan Path Traversal:** Validasi input ketat saat membuka profil, mencegah akses folder di luar sistem (Path Traversal Protection).
+## ✨ Key Features
+- **Full Isolation:** Each account (group) runs in a completely separate browser profile (user data dir). Cookies, cache, and sessions will never leak between accounts.
+- **Fingerprinting Bypass:** Uses Camoufox configurations to avoid bot/fraud detection from Google's security systems.
+- **Resolution Adjustment (Anti-Clipping):** Forces the viewport resolution (1200x700) to match Windows monitor displays, preventing the detection of unnatural screen sizes.
+- **Comprehensive Activity Logs:** Tracks all errors, navigations, and technical browser info in real-time to the `logs/` folder (with an automatic filter for sensitive URLs).
+- **Path Traversal Security:** Strict input validation when opening profiles, preventing access to folders outside the system (Path Traversal Protection).
 
-## 🚀 Cara Penggunaan
+## 🚀 How to Use
 
-1. Pastikan Anda sudah menginstal Python (disarankan versi 3.10+).
+1. Make sure you have Python installed (version 3.10+ recommended).
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-3. Jalankan melalui script **Batch** (Sangat disarankan):
-   - Klik ganda pada `Buka_Grup.bat`
-   - Masukkan nama grup (Contoh: `Grup_1`, `akun_kerja`, dll)
-   - Browser Camoufox akan terbuka dan sesi Anda akan tersimpan otomatis.
+3. Run via the **Batch** script (Highly recommended):
+   - Double-click on `Open_Group.bat`
+   - Enter the group name (Example: `Group_1`, `work_account`, etc.)
+   - The Camoufox browser will open and your session will be saved automatically.
 
-*Atau via terminal:*
+*Or via terminal:*
 ```bash
-python jalankan_grup.py <nama_grup>
+python run_group.py <group_name>
 ```
 
-## 📂 Struktur Log
-Log disimpan di folder `/logs` dengan format penamaan per hari:
-`YYYY-MM-DD_<nama_grup>.log`
-Log akan memfilter otomatis URL sensitif (seperti `accounts.google.com`) demi privasi, namun tetap mencatat aktivitas navigasi lain dan info teknis browser.
+## 📂 Log Structure
+Logs are saved in the `/logs` folder with a daily naming format:
+`YYYY-MM-DD_<group_name>.log`
+The logs will automatically redact sensitive URLs (like `accounts.google.com`) for privacy, while still recording other navigation activities and technical browser info.
 
-## 🛡️ Catatan Keamanan
-Repositori ini sudah dilengkapi dengan `.gitignore` ketat. **JANGAN PERNAH** menghapus atau mengubah aturan di `.gitignore` untuk mencegah data profil, *cookies*, dan histori penelusuran Anda (folder `Grup_*`) bocor ke publik jika Anda melakukan *push* ke repositori eksternal.
+## 🛡️ Security Notes
+This repository is equipped with a strict `.gitignore`. **NEVER** delete or modify the rules in `.gitignore` to prevent your profile data, *cookies*, and browsing history (the `Group_*` folders) from leaking to the public if you push to an external repository.
 
-## 📄 Lisensi
+## ⚠️ Disclaimer
+This tool is created for the legal management of multiple accounts. 
+Users are solely responsible for using this tool in accordance with 
+the Terms of Service of the platforms being accessed.
+
+## 📄 License
 Distributed under the MIT License. See `LICENSE` for more information.
