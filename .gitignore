@@ -1,9 +1,12 @@
-# Sensitive profile data - JANGAN DI-COMMIT
+# Sensitive profile data - DO NOT COMMIT
+Group_*/
+group_*/
 Grup_*/
 grup_*/
 test_dir/
 test_window/
 test_window2/
+.kiro/
 logs/
 
 # Entire profile directories (Stricter Pattern)

@@ -18,6 +18,47 @@ SENSITIVE_DOMAINS = ['accounts.google.com', 'mail.google.com', 'myaccount.google
 # Prevent lengthy Playwright tracebacks on Ctrl+C
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
+IGNORED_DIRS = {'.git', 'logs', '__pycache__', '.venv', 'node_modules'}
+
+def get_available_groups():
+    """Scan current directory for group folders."""
+    groups = []
+    for entry in sorted(os.listdir('.')):
+        if os.path.isdir(entry) and entry.lower() not in IGNORED_DIRS and not entry.startswith('.'):
+            groups.append(entry)
+    return groups
+
+def resolve_group_input(user_input):
+    """
+    Resolve flexible user input to an actual group folder name.
+    Accepts:
+      - A number (e.g. "1") matching the listed order
+      - A group name, case-insensitive (e.g. "Group_1", "group_1", "GROUP_1")
+    """
+    groups = get_available_groups()
+
+    # Try as a number first
+    if user_input.isdigit():
+        idx = int(user_input) - 1
+        if 0 <= idx < len(groups):
+            return groups[idx]
+        raise ValueError(
+            f"Invalid number '{user_input}'. Available: 1-{len(groups)}"
+        )
+
+    # Try case-insensitive match against existing folders
+    for group in groups:
+        if group.lower() == user_input.lower():
+            return group
+
+    # If no match found, validate as a new group name
+    if not re.match(r'^[a-zA-Z0-9_-]+$', user_input):
+        raise ValueError(f"Invalid group name: {user_input}")
+    if user_input.startswith(('.', '-')):
+        raise ValueError("Group name cannot start with '.' or '-'")
+
+    return user_input
+
 def validate_group_name(group_name):
     """Validate group name to prevent path traversal."""
     if not re.match(r'^[a-zA-Z0-9_-]+$', group_name):
@@ -136,12 +177,24 @@ def attach_navigation_monitor(browser, logger):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python run_group.py <group_name>")
-        print("Example: python run_group.py Group_1")
+        groups = get_available_groups()
+        print("Usage: python run_group.py <group_name_or_number>")
+        print()
+        if groups:
+            print("Available groups:")
+            for i, g in enumerate(groups, 1):
+                print(f"  {i}. {g}")
+            print()
+            print("Examples:")
+            print(f"  python run_group.py 1")
+            print(f"  python run_group.py {groups[0]}")
+        else:
+            print("Example: python run_group.py Group_1")
         sys.exit(1)
 
     try:
-        group_name = validate_group_name(sys.argv[1])
+        group_name = resolve_group_input(sys.argv[1])
+        validate_group_name(group_name)
     except ValueError as e:
         print(f"[!] ERROR: {e}")
         sys.exit(1)
