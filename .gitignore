@@ -8,6 +8,7 @@ test_window/
 test_window2/
 .kiro/
 logs/
+!logs/.gitkeep
 
 # Entire profile directories (Stricter Pattern)
 **/prefs.js
@@ -48,6 +49,20 @@ sessionstore-backups/
 
 # Python Virtual Environment
 venv/
+.venv/
 .env
 __pycache__/
 *.pyc
+*.pyo
+
+# Sensitive data - DO NOT COMMIT
+accounts.json
+config/auth_config.json
+config/smtp_config.json
+checksums.json
+*.enc
+*.enc.bak
+
+# IDE
+.vscode/
+.idea/

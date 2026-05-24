@@ -1,0 +1,9 @@
+{
+  "Group_1": [
+    {
+      "email": "example@gmail.com",
+      "password": "<encrypted_fernet_token>",
+      "salt": "<base64_salt>"
+    }
+  ]
+}
